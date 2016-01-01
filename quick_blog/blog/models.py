@@ -2,6 +2,9 @@ from django.db import models
 from django.core.urlresolvers import reverse
 
 
+from django_markdown.models import MarkdownField
+
+
 class EntryQuerySet(models.QuerySet):
 
     def published(self):
@@ -17,7 +20,7 @@ class Entry(models.Model):
         ordering = ["-created"]
 
     title = models.CharField(max_length=180)
-    body = models.TextField()
+    body = MarkdownField()
     # field to store human-readable urls
     slug = models.SlugField(max_length=180, unique=True)
     published = models.BooleanField(default=False)
