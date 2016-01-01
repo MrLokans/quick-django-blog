@@ -5,6 +5,14 @@ from django.core.urlresolvers import reverse
 from django_markdown.models import MarkdownField
 
 
+class Tag(models.Model):
+
+    slug = models.SlugField(max_length=180, unique=True)
+
+    def __str__(self):
+        return self.slug
+
+
 class EntryQuerySet(models.QuerySet):
 
     def published(self):
@@ -26,9 +34,13 @@ class Entry(models.Model):
     published = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    tags = models.ManyToManyField(Tag)
 
     # we extand filtering methods this way
     objects = EntryQuerySet.as_manager()
+
+    def get_absolute_url(self):
+        return reverse("post_detail", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title

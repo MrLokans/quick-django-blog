@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load django_markdown %}
+
+<div class="post">
+    <h2><a href="{% url "post_detail" slug=object.slug %}">{{ object.title }}</a></h2>
+    <p class="created">{{ object.created }}</p>
+    <div class="tags">{{ object.tags.all|join:", " }}</div>
+    <div class="post-content">
+        {{ object.body|markdown }}
+    </div>
+</div>

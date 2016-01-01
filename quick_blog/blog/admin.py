@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from django_markdown.admin import MarkdownModelAdmin
 
-from .models import Entry
+from .models import Entry, Tag
 
 
 class EntryAdmin(MarkdownModelAdmin):
@@ -12,3 +12,4 @@ class EntryAdmin(MarkdownModelAdmin):
 
 
 admin.site.register(Entry, EntryAdmin)
+admin.site.register(Tag)

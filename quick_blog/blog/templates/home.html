@@ -5,7 +5,7 @@
     {% for object in object_list %}
         <div class="post">
             <p class="created">{{ object.created }}</p>
-            a
+            <div class="tags">{{ object.tags.all|join:", " }}</div>
             <div class="post-content">
                 {{ object.body|markdown }}
             </div>
